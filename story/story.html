@@ -1,24 +1,111 @@
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
+<html>
+  <head>
+    <style>
+     /* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
  */
+#map {
+  height: 100%;
+}
 
-// [START maps_map_simple]
-let map: google.maps.Map;
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color:rgb(218, 234, 218)
+}   
 
-function initMap(): void {
-  map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
+.image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width : 600px;
+  height: 450px;
+}
+h1{
+  text-align: center;
+  font-family:Georgia, 'Times New Roman', Times, serif
+}
+p{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+    </style>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+<h1>Top of the Giant, Sleeping Giant Provincial Park</h1>
+
+<img class="image" src= "sleepinggiant.jpeg" alt="Girl in a jacket">
+
+<p>This photo above was from when I visited the Top of the Giant in August 2021. With an elevation gain of 290 m and a round trip distance of 22.4 km, you better come prepared with food and water!</p>
+<p>The dynamic map below shows the straight line path that a boat would take from the Top of the Giant, to a Prince Arthur's Landing (a harbour in Thunder Bay, Ontario)</p>
+<p>A straight line boat ride from the Top of the Giant (like the map below displays) would only be a 25 km trip, however walking from Top of The Giant to Prince Arthurs Landing is almost 87 km. Maybe they should cosider creating a boat shuttle service!</p>
+    <div id="map"></div>
+
+    <!-- 
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises
+      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+      -->
+    <script>
+    let map;
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 48.326, lng: -89.1 },
+        zoom: 11,
+      });
+      const flightPlanCoordinates = [
+    { lat: 48.326, lng: -88.919 },
+    { lat: 48.431, lng: -89.219 },
+  ];
+  const flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
   });
-}
 
-declare global {
-  interface Window {
-    initMap: () => void;
-  }
-}
+
+   {const marker = new google.maps.Marker({
+    position: { lat: 48.326, lng: -88.919 },
+    map,
+    title: "Top of The Giant Lookout",
+    label: "Top of The Giant Lookout"
+  });
+   }
+  {const marker = new google.maps.Marker({
+    position: { lat: 48.431, lng: -89.219 },
+    map,
+    title: "Prince Arthur's Landing",
+    label: "Prince Arthur's Landing"
+  });
+    }
+    
+    window.initMap = initMap;
+
+
+
+  flightPath.setMap(map);
+    }
+
 window.initMap = initMap;
-// [END maps_map_simple]
-export {};
+    </script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly"
+    defer
+  ></script>
+
+  </body>
+</html>
