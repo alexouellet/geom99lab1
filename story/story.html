@@ -58,6 +58,8 @@ p{
       with https://www.npmjs.com/package/@googlemaps/js-api-loader.
       -->
     <script>
+    <!-- simple map documentation from https://developers.google.com/maps/documentation/javascript/examples/map-simple -->
+    <!-- map centered at specific coordinate and zoom level set to 12  -->
     let map;
 
     function initMap() {
@@ -65,6 +67,10 @@ p{
         center: { lat: 48.35, lng: -89.1 },
         zoom: 12,
       });
+      
+     <!-- linear path documentation from https://developers.google.com/maps/documentation/javascript/examples/polyline-simple --> 
+     <!-- linear path assigned two sets of coordiantes as well as visual properties  --> 
+      
       const flightPlanCoordinates = [
     { lat: 48.326, lng: -88.919 },
     { lat: 48.431, lng: -89.219 },
@@ -77,7 +83,9 @@ p{
     strokeWeight: 2,
   });
 
-
+<!-- marker documentation from https://developers.google.com/maps/documentation/javascript/examples/marker-simple --> 
+<!-- markers assigned coordinates and title  --> 
+      
    {const marker = new google.maps.Marker({
     position: { lat: 48.326, lng: -88.919 },
     map,
@@ -97,7 +105,8 @@ p{
 
   flightPath.setMap(map);
     }
-
+      
+<!-- api key from d2L used --> 
 window.initMap = initMap;
     </script>
     <script
